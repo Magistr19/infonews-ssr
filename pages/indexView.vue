@@ -10,7 +10,7 @@ v-container(grid-list-md)
             template
               v-card(:to='"/post/" + post._id' style='height: 100%!important; overflow: hidden')
                 v-layout(column style='height: 100%')
-                  v-card-media(:src='"http://localhost:3232" + post.picture' height='200px')
+                  v-card-media(:src='"https://infonews-payareli.herokuapp.com" + post.picture' height='200px')
                   v-card-title
                     span {{ post.title.toUpperCase() }}
                   v-card-text

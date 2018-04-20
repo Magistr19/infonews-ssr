@@ -45,7 +45,7 @@ export function createStore () {
       fetchOnePost ({ commit }, postId) {
         console.log('Fetch post: ', postId)
         return Api.postsApi.getPostById(postId)
-          .then(post =>commit('setPost', post))
+          .then(post => commit('setPost', post))
           .catch(e => console.log(e))
       },
       fetchCategories ({ commit }) {

@@ -8,12 +8,12 @@ export const Api = {
   postsApi,
   usersApi,
   logIn(authData) {
-    return axios.post('http://localhost:3232/api/logIn', authData)
+    return axios.post('https://infonews-payareli.herokuapp.com/api/logIn', authData)
       .then(res => res.data)
       .catch(e => { throw new Error(e.response.data.message); })
   },
   logOut() {
-    return axios.post('http://localhost:3232/api/logOut')
+    return axios.post('https://infonews-payareli.herokuapp.com/api/logOut')
       .then(res => res.data)
       .catch(e => { throw new Error(e.response.data.message); })
   }

@@ -7,7 +7,7 @@
         v-card(:to='"/post/" + post._id' ripple).px-3.py-3
           v-layout(row wrap)
             v-flex(xs12 md3 lg4)
-              img(:src='"http://localhost:3232" + post.picture' style='max-width: 100%').d-block
+              img(:src='"https://infonews-payareli.herokuapp.com" + post.picture' style='max-width: 100%').d-block
             v-flex(xs12 md9 lg8)
               v-layout(column style='height: 100%')
                 v-card-title

@@ -2,7 +2,7 @@
   v-layout
     v-flex
       v-card
-        v-card-media(:src='"http://localhost:3232" + currentPost.picture' height='400px')
+        v-card-media(:src='"https://infonews-payareli.herokuapp.com" + currentPost.picture' height='400px')
         v-card-title
           h1.headline {{ currentPost.title }}
         v-card-text(v-html='currentPost.content').post-content
