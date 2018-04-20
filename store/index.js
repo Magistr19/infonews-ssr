@@ -71,7 +71,6 @@ export function createStore () {
         state.postsList = posts
       },
       setPost (state, post) {
-        // console.log('Post: ', post)
         state.currentPost = post
       },
       setCurrentUser (state, { user, token }) {

@@ -1,16 +1,16 @@
 {
-  "/": {
-    "title": "Vue.js 2 Material Component Framework",
+  "index": {
+    "title": "InfoNews - Главная",
     "description": "My Vuetify.js Project",
     "keywords": "vue 2.0, vuetify"
   },
-  "/categories": {
-    "title": "Create something amazing",
+  "category": {
+    "title": "InfoNews - Рубрики",
     "description": "",
     "keywords": ""
   },
-  "/post": {
-    "title": "Create something amazing",
+  "post": {
+    "title": "InfoNews",
     "description": "",
     "keywords": ""
   }

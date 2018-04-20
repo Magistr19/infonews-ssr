@@ -8,8 +8,9 @@ const meta = require('./meta.json')
 // Is default lazy but can be changed
 function route (path, view) {
   return {
+    name: view,
     path: path,
-    meta: meta[path],
+    meta: meta[view],
     component: resolve => import(`pages/${view}View.vue`).then(resolve)
   }
 }
