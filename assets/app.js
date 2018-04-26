@@ -12,7 +12,8 @@ import {
   VCard,
   transitions,
   VDivider,
-  VSubheader
+  VSubheader,
+  VExpansionPanel
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
 import App from './App.vue'
@@ -35,7 +36,8 @@ Vue.use(Vuetify, {
     VCard,
     transitions,
     VDivider,
-    VSubheader
+    VSubheader,
+    VExpansionPanel
   }
 })
 

@@ -3,9 +3,14 @@
     v-navigation-drawer(v-model='drawer' fixed app)
       v-toolbar
         v-toolbar-title Категории
-      v-list(dense)
-        v-list-tile(v-for='category,i in categories' :key='i')
-          v-btn(:to='"/categories/" + category.link' flat) {{ category.title }}
+      v-expansion-panel
+        v-expansion-panel-content(v-for='category,i in categories' :key='i')
+          v-btn(:to='"/categories/" + category.link' flat slot='header' block) {{ category.title }}
+          v-btn(
+            :to='"/categories/" + subcategory.link'
+            flat
+            v-for='subcategory,i in category.subcategories'
+            :key='i' block) {{ subcategory.title }}
     v-toolbar(fixed app)
       v-toolbar-side-icon(@click.stop="drawer = !drawer")
       v-toolbar-title
