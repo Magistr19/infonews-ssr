@@ -1,20 +1,29 @@
-import axios from 'axios';
-import categoriesApi from './categoriesApi';
-import postsApi from './postsApi';
-import usersApi from './usersApi';
+import axios from 'axios'
 
 export const Api = {
-  categoriesApi,
-  postsApi,
-  usersApi,
-  logIn(authData) {
-    return axios.post('https://infonews-payareli.herokuapp.com/api/logIn', authData)
+  getAllCategories() {
+    return axios.get('https://infonews-payareli.herokuapp.com/api/allCategories')
       .then(res => res.data)
-      .catch(e => { throw new Error(e.response.data.message); })
+      .catch(e => [])
   },
-  logOut() {
-    return axios.post('https://infonews-payareli.herokuapp.com/api/logOut')
+  getPostsByCategory(cat, from, to, sort) {
+    return axios.get(`https://infonews-payareli.herokuapp.com/api/posts/${cat}`, { params: { from, to, sort }})
+        .then(res => res.data)
+        .catch(e => []);
+  },
+  getLastPostsInAllCategories(count) {
+    return axios.get('https://infonews-payareli.herokuapp.com/api/lastPosts')
       .then(res => res.data)
-      .catch(e => { throw new Error(e.response.data.message); })
+      .catch(e => [])
+  },
+  getPostById(id) {
+    return axios.get(`https://infonews-payareli.herokuapp.com/api/post/${id}`)
+      .then(res => res.data)
+      .catch(e => { throw new Error(e.message) });
+  },
+  getAllPostsPreview(token) {
+    return axios.get('https://infonews-payareli.herokuapp.com/api/postsAll', { headers: { token }})
+      .then(res => res.data)
+      .catch(e => [])
   }
 }

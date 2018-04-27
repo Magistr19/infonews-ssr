@@ -18,51 +18,41 @@ export function createStore () {
         category: {},
         shortcat: ''
       },
-      categoriesList: [],
-      users: [],
-      currentUser: {},
-      authToken: ''
+      categoriesList: []
     },
 
     actions: {
       fetchLastPosts ({ commit }) {
         console.log('Fetch last posts')
-        return Api.postsApi.getLastPostsInAllCategories()
+        return Api.getLastPostsInAllCategories()
           .then(posts => commit('setPostsList', posts))
           .catch(e => console.error(e))
           
       },
-      fetchPostsByCategory ({ commit }, { category, from, to }) {
+      fetchPostsByCategory ({ commit }, { category, from, to, sort }) {
         console.group('Fetch posts')
         console.log('Category: ', category)
         console.log('From: ', from)
         console.log('To: ', to)
+        console.log('Sort: ', sort)
         console.groupEnd()
-        return Api.postsApi.getPostsByCategory(category, from, to)
+        return Api.getPostsByCategory(category, from, to, sort)
           .then(posts => commit('setPostsList', posts))
           .catch(e => console.error(e))
       },
       fetchOnePost ({ commit }, postId) {
         console.log('Fetch post: ', postId)
-        return Api.postsApi.getPostById(postId)
+        return Api.getPostById(postId)
           .then(post => commit('setPost', post))
-          .catch(e => console.log(e))
+          .catch(e => { throw new Error(e.message) })
       },
       fetchCategories ({ commit }) {
         console.log('Fetch categories')
-        return Api.categoriesApi.getAllCategories()
+        return Api.getAllCategories()
           .then(categories => {
             commit('setCategories', categories)
           })
           .catch(e => console.log('Error: ', e))
-      },
-      logIn ({ commit }, { login, password }) {
-        console.group('LogIn')
-        console.log('Login: ', login, ' Password: ', password)
-        console.groupEnd()
-      },
-      logOut ({ commit }) {
-        console.log('Logout')
       }
     },
 
@@ -73,16 +63,6 @@ export function createStore () {
       setPost (state, post) {
         state.currentPost = post
       },
-      setCurrentUser (state, { user, token }) {
-        state.currentUser = user
-        state.authToken = token
-        sessionStorage.setItem('infonews-token', token)
-      },
-      clearCurrentUser (state) {
-        state.authToken = ''
-        sessionStorage.removeItem('infonews-token')
-        state.currentUser = {}
-      },
       setCategories (state, categories) {
         state.categoriesList = categories
       }
@@ -91,8 +71,6 @@ export function createStore () {
     getters: {
       posts: (state) => state.postsList,
       categories: (state) => state.categoriesList,
-      user: (state) => state.currentUser,
-      users: (state) => state.users,
       currentPost: (state) => state.currentPost
     }
   })
