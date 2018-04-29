@@ -6,10 +6,15 @@ export const Api = {
       .then(res => res.data)
       .catch(e => [])
   },
+  getAllPosts (from, to, sort) {
+    return axios.get('https://infonews-payareli.herokuapp.com/api/postsAll', { params: { from, to, sort }})
+      .then(res => res.data)
+      .catch(e => []);
+  },
   getPostsByCategory(cat, from, to, sort) {
     return axios.get(`https://infonews-payareli.herokuapp.com/api/posts/${cat}`, { params: { from, to, sort }})
-        .then(res => res.data)
-        .catch(e => []);
+      .then(res => res.data)
+      .catch(e => []);
   },
   getLastPostsInAllCategories(count) {
     return axios.get('https://infonews-payareli.herokuapp.com/api/lastPosts')

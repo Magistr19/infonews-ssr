@@ -26,6 +26,7 @@ export function createRouter () {
         route('/', 'index'),
         route('/post/:id', 'post'),
         route('/categories/:cat', 'category'),
+        route('/allPosts', 'allPosts'),
         // Global redirect for 404
         { path: '*', redirect: '/' }
       ]

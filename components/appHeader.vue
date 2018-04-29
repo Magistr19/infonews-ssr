@@ -3,6 +3,7 @@
     v-navigation-drawer(v-model='drawer' fixed app)
       v-toolbar
         v-toolbar-title Категории
+      v-btn(block flat to='/allPosts') Лента
       v-expansion-panel
         v-expansion-panel-content(v-for='category,i in categories' :key='i')
           v-btn(:to='"/categories/" + category.link' flat slot='header' block) {{ category.title }}

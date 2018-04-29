@@ -44,6 +44,11 @@ export function createStore () {
             commit('setCategories', categories)
           })
           .catch(e => console.log('Error: ', e))
+      },
+      fetchAllPosts ({ commit }, { from, to, sort }) {
+        return Api.getAllPosts(from, to, sort)
+          .then(posts => commit('setPostsList', posts))
+          .catch(e => console.error(e))
       }
     },
 

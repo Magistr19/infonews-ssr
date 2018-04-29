@@ -13,5 +13,10 @@
     "title": "InfoNews",
     "description": "",
     "keywords": ""
+  },
+  "allPosts": {
+    "title": "InfoNews - Лента",
+    "description": "",
+    "keywords": ""
   }
 }

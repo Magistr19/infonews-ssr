@@ -1,7 +1,6 @@
 <template lang='pug'>
   v-layout
     v-flex
-      h1.headline.mb-3 {{ categoryTitle }}
       v-select(:items='sortOptions' v-model='selectedSort' label='Сортувати по')
       v-btn(block @click='loadPrev' v-if='from > 0' id='start' color='primary') Попередні 5
       template(v-for='post,i in posts')
@@ -35,8 +34,8 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 export default {
-  asyncData ({ store, route }) {
-    return store.dispatch('fetchPostsByCategory', { category: route.params.cat, from: 0, to: 5, sort: '' })
+  asyncData ({ store }) {
+    store.dispatch('fetchAllPosts', { from: 0, to: 5, sort: '' })
   },
 
   data () {
@@ -53,39 +52,27 @@ export default {
     }
   },
 
-  computed: {
-    ...mapGetters(['posts', 'categories']),
-    categoryTitle () {
-      const category = this.categories.find(cat => cat.link === this.$route.params.cat)
-      return category ? category.title : ''
-    }
-  },
+  computed: mapGetters(['posts']),
 
   methods: {
-    ...mapActions(['fetchPostsByCategory']),
+    ...mapActions(['fetchAllPosts']),
     loadNext () {
       this.from += 5
       this.to += 5
-      this.fetchPostsByCategory({ category: this.$route.params.cat, from: this.from, to: this.to, sort: this.selectedSort })
+      this.fetchAllPosts({ from: this.from, to: this.to, sort: this.selectedSort })
         .then(() => { window.location.hash = 'start' })
     },
     loadPrev () {
       this.to = this.from
       this.from -5 ? this.from -= 5 : this.from = 0
-      this.fetchPostsByCategory({ category: this.$route.params.cat, from: this.from, to: this.to, sort: this.selectedSort })
+      this.fetchAllPosts({ from: this.from, to: this.to, sort: this.selectedSort })
         .then(() => { window.location.hash = 'end' })
     }
   },
 
   watch: {
-    '$route': function () {
-      this.fetchPostsByCategory({ category: this.$route.params.cat, from: 0, to: 5, sort: this.selectedSort })
-      this.from = 0
-      this.to = 5
-      this.selectedSort = ''
-    },
     'selectedSort': function (sort) {
-      this.fetchPostsByCategory({ category: this.$route.params.cat, from: this.from, to: this.to, sort })
+      this.fetchAllPosts({ from: this.from, to: this.to, sort })
     }
   }
 }
