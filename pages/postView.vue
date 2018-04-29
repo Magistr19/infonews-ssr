@@ -14,7 +14,7 @@
                 span.ml-1 {{ currentPost.views }}
               span.px-2
                 v-icon(left) query_builder
-                span.ml-2 {{ cyrToLat(currentPost.date) }}
+                span.ml-2 {{ currentPost.date | toDateString }}
             v-flex
               span.px-2
                 v-icon(left) account_circle
@@ -23,21 +23,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import cyrToLat from '../assets/cyrToLat'
 
 export default {
 
   asyncData ({ store, route }) {
-    return store.dispatch('fetchCategories')
-      .then(() => store.dispatch('fetchOnePost', route.params.id))
+    return store.dispatch('fetchOnePost', route.params.id)
   },
 
   computed: {
     ...mapGetters(['currentPost'])
-  },
-
-  methods: {
-    cyrToLat
   }
 }
 </script>

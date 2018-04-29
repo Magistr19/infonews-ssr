@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import { Api } from './Api/Api'
+import { Api } from './Api'
 Vue.use(Vuex)
 
 export function createStore () {
@@ -23,31 +23,22 @@ export function createStore () {
 
     actions: {
       fetchLastPosts ({ commit }) {
-        console.log('Fetch last posts')
         return Api.getLastPostsInAllCategories()
           .then(posts => commit('setPostsList', posts))
           .catch(e => console.error(e))
           
       },
       fetchPostsByCategory ({ commit }, { category, from, to, sort }) {
-        console.group('Fetch posts')
-        console.log('Category: ', category)
-        console.log('From: ', from)
-        console.log('To: ', to)
-        console.log('Sort: ', sort)
-        console.groupEnd()
         return Api.getPostsByCategory(category, from, to, sort)
           .then(posts => commit('setPostsList', posts))
           .catch(e => console.error(e))
       },
       fetchOnePost ({ commit }, postId) {
-        console.log('Fetch post: ', postId)
         return Api.getPostById(postId)
           .then(post => commit('setPost', post))
           .catch(e => { throw new Error(e.message) })
       },
       fetchCategories ({ commit }) {
-        console.log('Fetch categories')
         return Api.getAllCategories()
           .then(categories => {
             commit('setCategories', categories)

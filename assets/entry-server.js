@@ -35,7 +35,9 @@ export default context => {
           store,
           route: router.currentRoute
         })
-      })).then(() => {
+      }))
+      .then(() => store.dispatch('fetchCategories')) // before server render we must fetch categories on server
+      .then(() => {
         isDev && console.log(`data pre-fetch: ${Date.now() - s}ms`)
         // After all preFetch hooks are resolved, our store is now
         // filled with the state needed to render the app.

@@ -22,7 +22,7 @@ v-container(grid-list-md)
                         span.ml-1 {{ post.views }}
                       span.px-2
                         v-icon(left) query_builder
-                        span.ml-2 {{ cyrToLat(post.date) }}
+                        span.ml-2 {{ post.date | toDateString }}
                       span.px-2
                         v-icon(left) account_circle
                         span.ml-2 {{ post.author }}
@@ -31,12 +31,10 @@ v-container(grid-list-md)
 
 <script>
 import { mapGetters } from 'vuex'
-import cyrToLat from '../assets/cyrToLat'
 
 export default {
   asyncData ({ store }) {
-    return store.dispatch('fetchCategories')
-      .then(() => store.dispatch('fetchLastPosts'))
+    return store.dispatch('fetchLastPosts')
   },
 
   computed: {
@@ -46,8 +44,7 @@ export default {
   methods: {
     postsByCategory(postCat) {
       return this.posts.filter(post => post.categories.title === postCat);
-    },
-    cyrToLat
+    }
   }
 }
 </script>

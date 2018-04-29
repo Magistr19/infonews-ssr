@@ -23,7 +23,7 @@
                         span.ml-1 {{ post.views }}
                       span.px-2
                         v-icon(left) query_builder
-                        span.ml-2 {{ cyrToLat(post.date) }}
+                        span.ml-2 {{ post.date | toDateString }}
                     v-flex
                       span.px-2
                         v-icon(left) account_circle
@@ -34,11 +34,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import cyrToLat from '../assets/cyrToLat'
 export default {
   asyncData ({ store, route }) {
-    return store.dispatch('fetchCategories')
-      .then(() => store.dispatch('fetchPostsByCategory', { category: route.params.cat, from: 0, to: 5, sort: '' }))
+    return store.dispatch('fetchPostsByCategory', { category: route.params.cat, from: 0, to: 5, sort: '' })
   },
 
   data () {
@@ -65,7 +63,6 @@ export default {
 
   methods: {
     ...mapActions(['fetchPostsByCategory']),
-    cyrToLat,
     loadNext () {
       this.from += 5
       this.to += 5
